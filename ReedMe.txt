@@ -1,0 +1,13 @@
+RunMe.pyc compiles the all the files for the mod.
+It pulls information about advisors form input.csv.
+That csv is formated as:
+Name in Code; English Localization; German Localization; French Localization; Spanish Localization; Mod From; Point Type; Modifier Name in code; Modifier Value
+Note: Localization are not entirely required if left out then a blank space will be left where they would go in the text and users should still be able to determine which advisor the event is for based on their name.
+Note: While it says Language 5;Language 6;Language 7;ect those are for future use in case anyone wants to do some translations in the localization methods for me.
+
+Note: If an advisor has multiple modifiers then separate each modifier name and value with a space.
+
+Several options to change the properties of the mod in config.cfg.
+
+After all desired changes are made in input and config run RunMe.pyc to generate all required files for this mod.  
+Finally copy generated common, events, and localisation folders into your mod.

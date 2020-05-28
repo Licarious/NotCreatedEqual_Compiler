@@ -1,0 +1,22 @@
+#Name in Code;English;German;French;Spanish;mod;point_type;Modifier Names;Modifier Values;Language 5;Language 6;Language 7;ect
+army_organiser;Army Organizer;Armeeorganisator;Intendant aux armées;Organizador de ejércitos;V;MIL;land_forcelimit_modifier;0.1
+commandant;Commandant;Kommandant;Maître-instructeur;Comandante;V;MIL;discipline;0.05
+army_reformer;Army Reformer;Armeereformer;Réformateur militaire;Reformista del ejército;V;MIL;land_morale;0.1
+grand_captain;Grand Captain;Großer Führer;Grand capitaine;Gran capitán;V;MIL;land_maintenance_modifier;-0.1
+recruitmaster;Master Recruiter;Rekrutierungsmeister;Maître-recruteur;Reclutador;V;MIL;global_manpower_modifier;0.1
+fortification_expert;Military Engineer;Militäringenieur;Ingénieur militaire;Ingeniero militar;V;MIL;defensiveness;0.2
+quartermaster;Quartermaster;Quartiermeister;Fourrier;Intendente;V;MIL;reinforce_speed;0.33
+artist;Artist;Künstler;Artiste;Artista;V;ADM;stability_cost_modifier;-0.1
+inquisitor;Inquisitor;Inquisitor;Inquisiteur;Inquisidor;V;ADM;global_missionary_strength;0.02
+master_of_mint;Master of Mint;Meisterpräger;Maître de la monnaie;Maestro acuñador;V;ADM;inflation_reduction;0.1
+natural_scientist;Natural Scientist;Naturwissenschaftler;Scientifique;Naturalista;V;ADM;production_efficiency;0.1
+philosopher;Philosopher;Philosoph;Philosophe;Filósofo;V;ADM;prestige;1
+theologian;Theologian;Theologe;Théologien;Teólogo;V;ADM;global_unrest;-2
+treasurer;Treasurer;Schatzmeister;Financier;Tesorero;V;ADM;global_tax_modifier;0.1
+colonial_governor;Colonial Governor;Koloniegouverneur;Gouverneur colonial;Gober. colonial;V;DIP;global_tariffs;0.1
+diplomat;Diplomat;Diplomat;Diplomate;Diplomático;V;DIP;improve_relation_modifier;0.2
+naval_reformer;Naval Reformer;Flottenreformer;Réformateur naval;Reformista de la armada;V;DIP;naval_morale;0.1
+navigator;Navigator;Navigator;Navigateur;Navegante;V;DIP;range;0.2
+spymaster;Spymaster;Chefspion;Maître-espion;Jefe de espionaje;V;DIP;spy_offence;0.25
+statesman;Statesman;Staatsmann;Homme d'État;Estadista;V;DIP;diplomatic_reputation;1
+trader;Trader;Händler;Négociant;Mercader;V;DIP;trade_efficiency;1
