@@ -40,6 +40,7 @@ advisor_list = []
 Input = open("input.csv", "r", encoding='utf-8-sig')
 Config = open("config.cfg", "r", encoding='utf-8-sig')
 advisor_level_data = ["terrible", "inept", "mediocre", "good", "great", "amazing"]
+#If adding more events per advisor I encourage you to tack them onto the end of that range to not disrupt the math involved with events calling other events
 numEventsPerAdvisor = 8
 
 
@@ -68,6 +69,7 @@ advMTTPresentage = [[10,90,0,0,0,0],[30,0,70,0,0,0],[0,30,0,70,0,0],[0,0,30,0,70
 MTTHMonths = [7300]
 MaxAdvisorLevel = [5]
 MaxLevelBeforPromote = [3]
+AIEvents = [1]
 
 
 AdvisorPresentage = [Lx0,LxL,Lx,LxB,LxS,LxC1,LxC2,LxC3]
@@ -340,7 +342,7 @@ def Spanish_localization(advisor_list, advisor_level_data, modTitle):
         j+=1
     localization.close()
 
-def MTT_E_1(advisor_list,modTitle,HEvent,x,PointType):
+def combinedMTTHEvents(advisor_list,modTitle,HEvent,x,PointType):
     counter = 0
     q=0
     HEvent.write("\nCountry_event = {")
@@ -350,6 +352,8 @@ def MTT_E_1(advisor_list,modTitle,HEvent,x,PointType):
     HEvent.write("\n\tpicture = ADVISOR_eventPicture")
     HEvent.write("\n\thidden = yes")
     HEvent.write("\n\ttrigger = {")
+    if AIEvents[0] <1:
+        HEvent.write("\n\t\tai = no")
     HEvent.write("\n\t\tOR = {")
     for advisor in advisor_list:
         if advisor.pointType == PointType:
@@ -423,6 +427,8 @@ def combinedHireEvents(advisor_list,modTitle,HEvent,x,PointType):
     HEvent.write("\n\tpicture = ADVISOR_eventPicture")
     HEvent.write("\n\thidden = yes")
     HEvent.write("\n\ttrigger = {")
+    if AIEvents[0] <1:
+        HEvent.write("\n\t\tai = no")
     HEvent.write("\n\t\tOR = {")
     for advisor in advisor_list:
         if advisor.pointType == PointType:
@@ -465,6 +471,8 @@ def combinedFireEvents(advisor_list,modTitle,HEvent,x,PointType):
     HEvent.write("\n\tpicture = ADVISOR_eventPicture")
     HEvent.write("\n\thidden = yes")
     HEvent.write("\n\ttrigger = {")
+    #if AIEvents[0] <1: #in case users disable events mid save this will allow AI to still lose modifiers
+    #    HEvent.write("\n\t\tai = no")
     HEvent.write("\n\t\tOR = {")
     for advisor in advisor_list:
         if advisor.pointType == PointType:
@@ -507,6 +515,8 @@ def combinedPromoteEvents(advisor_list,modTitle,HEvent,x,PointType):
     HEvent.write("\n\tpicture = ADVISOR_eventPicture")
     HEvent.write("\n\thidden = yes")
     HEvent.write("\n\ttrigger = {")
+    if AIEvents[0] <1:
+        HEvent.write("\n\t\tai = no")
     HEvent.write("\n\t\tOR = {")
     for advisor in advisor_list:
         if advisor.pointType == PointType:
@@ -1098,7 +1108,7 @@ def Hire_Events(advisor_list, modTitle):
         if inList:
             HEvent.write("\n#%s"%p)
             if MTTHMonths[0] > 0 and writeMTTHEvents:
-                MTT_E_1(advisor_list,modTitle,HEvent,x,p)
+                combinedMTTHEvents(advisor_list,modTitle,HEvent,x,p)
                 x +=1
             combinedHireEvents(advisor_list,modTitle,HEvent,x,p)
             x +=1
@@ -1389,6 +1399,14 @@ def getConfig():
                 try:
                     int(element)
                     MaxLevelBeforPromote.append(int(element))
+                except:
+                    pass
+        if "AIEvents" in line:
+            AIEvents.clear()
+            for element in line:
+                try:
+                    int(element)
+                    AIEvents.append(int(element))
                 except:
                     pass
     i=0
