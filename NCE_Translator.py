@@ -1,8 +1,8 @@
 #ToDo
 #Hire/Fire events   -   Done
-#Notificaion everns -   Done
-#Promotion everts   -   Done
-#Random MTTH evernts-   Done
+#Notification events-   Done
+#Promotion events   -   Done
+#Random MTTH events -   Done
 #Mod Support        -   Done
 #Event_Modifiers    -   Done
 #Localization
@@ -40,6 +40,7 @@ advisor_list = []
 Input = open("input.csv", "r", encoding='utf-8-sig')
 Config = open("config.cfg", "r", encoding='utf-8-sig')
 advisor_level_data = ["terrible", "inept", "mediocre", "good", "great", "amazing"]
+#advisor_level_data = ["worthless", "terrible", "inept", "mediocre", "good", "great", "amazing"] #extra ability level example (worthless)
 #If adding more events per advisor I encourage you to tack them onto the end of that range to not disrupt the math involved with events calling other events
 numEventsPerAdvisor = 8
 
@@ -76,19 +77,19 @@ AdvisorPresentage = [Lx0,LxL,Lx,LxB,LxS,LxC1,LxC2,LxC3]
 
 for line in Input:
     DataElement = line.split(";")
-    if DataElement[0].startswith("#"):
+    if DataElement[0].strip().startswith("#"):
         pass
     else:
         test = Advisor()
-        test.dataName = DataElement[0]
-        test.titleEng = DataElement[1]
-        test.titleGer = DataElement[2]
-        test.titleFra = DataElement[3]
-        test.titleSpa = DataElement[4]
-        test.modSuffix = DataElement[5].upper()
-        test.pointType = DataElement[6]
-        test.modifierName = DataElement[7]
-        test.modifierValue = DataElement[8]
+        test.dataName = DataElement[0].strip()
+        test.titleEng = DataElement[1].strip()
+        test.titleGer = DataElement[2].strip()
+        test.titleFra = DataElement[3].strip()
+        test.titleSpa = DataElement[4].strip()
+        test.modSuffix = DataElement[5].strip().upper()
+        test.pointType = DataElement[6].strip()
+        test.modifierNames = DataElement[7].strip()
+        test.modifierValues = DataElement[8].strip()
         advisor_list.append(test)
 i=0
 
@@ -96,6 +97,7 @@ def English_localization(advisor_list, advisor_level_data, modTitle):
     localization = open(("localisation\\NCE_%s_l_english.yml"%modTitle), "w", encoding='utf-8-sig')
     localization.write("l_english:")
     advisor_level_Name = ["Terrible", "Inept", "Mediocre", "Good", "Great", "Amazing"]
+    #advisor_level_Name = ["Worthless", "Terrible", "Inept", "Mediocre", "Good", "Great", "Amazing"] #extra ability level example (worthless)
 
     #General Localizations
     #localization.write("\nNCE_%s.1.t:0 \"Not all men are created equal.\""%modTitle)
@@ -151,8 +153,8 @@ def English_localization(advisor_list, advisor_level_data, modTitle):
         localization.write("\"After many years of service $%s$ abilities have declined to\""%(advisor.dataName.upper()))
         
         localization.write("\nNCE_%s.%i.t:0 \"Not all men are created equal. ~ %s\""%(modTitle,j*numEventsPerAdvisor+1,advisor.titleEng))
-        localization.write("\nNCE_%s.%i.t:0 \"Skill level report ~ %s\""%(modTitle,j*numEventsPerAdvisor+3,advisor.titleEng))   
-        localization.write("\nNCE_%s.%i.t:0 \"Skill change ~ %s\""%(modTitle,j*numEventsPerAdvisor+5,advisor.titleEng))
+        localization.write("\nNCE_%s.%i.t:0 \"Ability level report ~ %s\""%(modTitle,j*numEventsPerAdvisor+3,advisor.titleEng))   
+        localization.write("\nNCE_%s.%i.t:0 \"Ability level change ~ %s\""%(modTitle,j*numEventsPerAdvisor+5,advisor.titleEng))
         j+=1
     localization.close()
 
@@ -160,6 +162,7 @@ def German_localization(advisor_list, advisor_level_data, modTitle):
     localization = open(("localisation\\NCE_%s_l_german.yml"%modTitle), "w", encoding='utf-8-sig')
     localization.write("l_german:")
     advisor_level_Name = ["Furchtbar", "Ungeschickt", "Mittelmäßig", "Gut", "Großartig", "Tolle"]
+    #advisor_level_Name = ["Wertlos","Furchtbar", "Ungeschickt", "Mittelmäßig", "Gut", "Großartig", "Tolle"] #extra ability level example (worthless)
 
     #General Localizations
     #localization.write("\nNCE_%s.1.t:0 \"Nicht alle Männer sind gleich geschaffen.\""%modTitle)
@@ -222,6 +225,7 @@ def French_localization(advisor_list, advisor_level_data, modTitle):
     localization = open(("localisation\\NCE_%s_l_french.yml"%modTitle), "w", encoding='utf-8-sig')
     localization.write("l_french:")
     advisor_level_Name = ["Terrible", "Inepte", "Médiocre", "Bon", "Génial", "Incroyable"]
+    #advisor_level_Name = ["Sans Valeur", "Terrible", "Inepte", "Médiocre", "Bon", "Génial", "Incroyable"] #extra ability level example (worthless)
 
     #General Localizations
     #localization.write("\nNCE_%s.1.t:0 \"Tous les hommes ne sont pas créés égaux.\""%modTitle)
@@ -275,8 +279,8 @@ def French_localization(advisor_list, advisor_level_data, modTitle):
         localization.write("\"Après de nombreuses années de service vos capacités %s, $%s$, se ont diminué\""%(advisor.titleFra,advisor.dataName.upper()))
 
         localization.write("\nNCE_%s.%i.t:0 \"Tous les hommes ne sont pas créés égaux. ~ %s\""%(modTitle,j*numEventsPerAdvisor+1,advisor.titleFra))
-        localization.write("\nNCE_%s.%i.t:0 \"Rapport sur le niveau de compétence ~ %s\""%(modTitle,j*numEventsPerAdvisor+3,advisor.titleFra)) 
-        localization.write("\nNCE_%s.%i.t:0 \"Changement de Compétence ~ %s\""%(modTitle,j*numEventsPerAdvisor+5,advisor.titleFra)) 
+        localization.write("\nNCE_%s.%i.t:0 \"Rapport sur le niveau de capacité ~ %s\""%(modTitle,j*numEventsPerAdvisor+3,advisor.titleFra)) 
+        localization.write("\nNCE_%s.%i.t:0 \"Changement de niveau de capacité ~ %s\""%(modTitle,j*numEventsPerAdvisor+5,advisor.titleFra)) 
         j+=1
     localization.close()
 
@@ -284,6 +288,7 @@ def Spanish_localization(advisor_list, advisor_level_data, modTitle):
     localization = open(("localisation\\NCE_%s_l_spanish.yml"%modTitle), "w", encoding='utf-8-sig')
     localization.write("l_spanish:")
     advisor_level_Name = ["Terrible", "Inepto", "Mediocre", "Bueno", "Excelente", "Increíble"]
+    #advisor_level_Name = ["Indigno", "Terrible", "Inepto", "Mediocre", "Bueno", "Excelente", "Increíble"] #extra ability level example (worthless)
 
     #General Localizations
     #localization.write("\nNCE_%s.1.t:0 \"No todos los hombres son creados iguales.\""%modTitle)
@@ -338,7 +343,7 @@ def Spanish_localization(advisor_list, advisor_level_data, modTitle):
 
         localization.write("\nNCE_%s.%i.t:0 \"No todos los hombres son creados iguales. ~ %s\""%(modTitle,j*numEventsPerAdvisor+1,advisor.titleSpa))
         localization.write("\nNCE_%s.%i.t:0 \"Informe de nivel de habilidad ~ %s\""%(modTitle,j*numEventsPerAdvisor+3,advisor.titleSpa)) 
-        localization.write("\nNCE_%s.%i.t:0 \"Cambio de habilidad ~ %s\""%(modTitle,j*numEventsPerAdvisor+5,advisor.titleSpa)) 
+        localization.write("\nNCE_%s.%i.t:0 \"Cambio de nivel de habilidad ~ %s\""%(modTitle,j*numEventsPerAdvisor+5,advisor.titleSpa)) 
         j+=1
     localization.close()
 
@@ -591,7 +596,7 @@ def Hire_Events(advisor_list, modTitle):
             #Gained Advisor
             if e%numEventsPerAdvisor==1: 
                 HEvent.write("\n\tid = NCE_%s.%i"%(modTitle,x))
-                HEvent.write("\n\ttitle = NCE_%s.1.t"%(modTitle))
+                HEvent.write("\n\ttitle = NCE_%s.%i.t"%(modTitle,x))
                 HEvent.write("\n\tdesc = NCE_%s.%s_test.d"%(modTitle,advisor.dataName))
                 HEvent.write("\n\tpicture = ADVISOR_eventPicture")
                 HEvent.write("\n\tis_triggered_only = yes")
@@ -603,7 +608,7 @@ def Hire_Events(advisor_list, modTitle):
                 #Option Do Nothing
                 if PrecentagePerOption[0]>0 and PrecentagePerOption[0]<=len(AdvisorPresentage):
                     HEvent.write("\n\toption = { #Do nothing")
-                    HEvent.write("\n\t\tname = NCE_%s.%i.a"%(modTitle,j*numEventsPerAdvisor+1))
+                    HEvent.write("\n\t\tname = NCE_%s.1.a"%(modTitle))
                 
                     HEvent.write("\n\t\tai_chance = { factor = %s }"%AIPrecentage[0])
                     for l in range(MaxLevelBeforPromote[0]):
@@ -987,10 +992,11 @@ def Hire_Events(advisor_list, modTitle):
                 HEvent.write("\n\tdesc = NCE_%s.%s_skill.d"%(modTitle,advisor.dataName))
                 HEvent.write("\n\tpicture = ADVISOR_eventPicture")
                 HEvent.write("\n\tis_triggered_only = yes")
-                for opt in range(6):
+                for l in range(len(advisor_level_data)):
                     HEvent.write("\n\toption = {")
-                    HEvent.write("\n\t\tname = NCE_%s.3.%s"%(modTitle,chr(97+opt)))
-                    HEvent.write("\n\t\ttrigger = {has_country_modifier = NCE_%s_%s}"%(advisor_level_data[opt],advisor.dataName))
+                    HEvent.write("\n\t\tname = NCE_%s.3.%s"%(modTitle,chr(97+l)))
+                    HEvent.write("\n\t\ttrigger = { has_country_modifier = NCE_%s_%s }"%(advisor_level_data[l],advisor.dataName))
+                    HEvent.write("\n\t\ttooltip = { add_country_modifier = { name = \"NCE_%s_%s\" } }"%(advisor_level_data[l],advisor.dataName))
                     HEvent.write("\n\t}")
 
             #Promote
@@ -1075,6 +1081,7 @@ def Hire_Events(advisor_list, modTitle):
                     HEvent.write("\n\toption = {")
                     HEvent.write("\n\t\tname = NCE_%s.3.%s"%(modTitle,chr(97+l)))
                     HEvent.write("\n\t\ttrigger = { has_country_modifier = NCE_%s_%s }"%(advisor_level_data[l],advisor.dataName))
+                    HEvent.write("\n\t\ttooltip = { add_country_modifier = { name = \"NCE_%s_%s\" } }"%(advisor_level_data[l],advisor.dataName))
                     HEvent.write("\n\t}")
 
             #MTTH Report
@@ -1092,6 +1099,7 @@ def Hire_Events(advisor_list, modTitle):
                     HEvent.write("\n\toption = {")
                     HEvent.write("\n\t\tname = NCE_%s.3.%s"%(modTitle,chr(97+l)))
                     HEvent.write("\n\t\ttrigger = { has_country_modifier = NCE_%s_%s }"%(advisor_level_data[l],advisor.dataName))
+                    HEvent.write("\n\t\ttooltip = { add_country_modifier = { name = \"NCE_%s_%s\" } }"%(advisor_level_data[l],advisor.dataName))
                     HEvent.write("\n\t}")
 
             HEvent.write("\n}")
@@ -1122,8 +1130,8 @@ def Hire_Events(advisor_list, modTitle):
 def Contry_modifiers(advisor_list, modTitle):
     HEvent = open(("common/event_modifiers/NCE_%s_modifiers.txt"%modTitle), "w", encoding='utf-8')
     for advisor in advisor_list:
-        mName = advisor.modifierName.split(" ") #for spliting modifiers when advisors have more than one
-        mValue = advisor.modifierValue.split(" ")
+        mName = advisor.modifierNames.split(" ") #for spliting modifiers when advisors have more than one
+        mValue = advisor.modifierValues.split(" ")
         for l in range(len(advisor_level_data)):
             HEvent.write("\nNCE_%s_%s = {"%(advisor_level_data[l],advisor.dataName))
             for m in range(len(mName)):
